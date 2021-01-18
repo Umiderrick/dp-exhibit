@@ -1,0 +1,38 @@
+#toolbar {
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
+
+.wms_table {
+	table-layout: fixed;
+}
+
+thead {
+	background-color: DarkGray;
+}
+
+.setColor {
+	color: #a94442
+}
+
+.error {
+	color: #a94442
+}
+
+.select2-container--default .select2-selection--single,
+	.select2-selection .select2-selection--single {
+	border-radius: 3px
+}
+
+.select2-container--default .select2-selection--multiple {
+	border-radius: 3px
+}
+
+.form-control {
+	border-radius: 3px
+}
+
+.input-group .input-group-addon{
+	border-bottom-right-radius: 3px;
+	border-top-right-radius: 3px
+}

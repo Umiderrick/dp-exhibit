@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metas>
+	<DDL id="ORDM">
+		<datasource type="datasource">
+			ordm
+		</datasource>
+		<meta id="AUTHUSER">
+			<type>query</type>
+			<name>AUTHUSER</name>
+			<property>
+				uid,
+				loginName,
+				commonName,
+				password,
+				orgUnit,
+				groupId,
+				roles,
+				grantStart,
+				grantEnd,
+				createTime,
+				expireTime,
+				macAddr,
+				status,
+				type,
+				lastUpdate
+			</property>
+			<stmt>
+			<![CDATA[
+				SELECT 
+		        uid,
+				loginName,
+				commonName,
+				password,
+				orgUnit,
+				groupId,
+				roles,
+				grantStart,
+				grantEnd,
+				createTime,
+				expireTime,
+				macAddr,
+				status,
+				type,
+				lastUpdate
+	            FROM core_authuser
+				]]> 
+			</stmt>
+		</meta>
+		<meta id="USERDETAIL">
+			<type>query</type>
+			<name>USERDETAIL</name>
+			<property>
+				userId,
+				name,
+				mobile,
+				phone,
+				customerType,
+				province,
+				city,
+				areaCounty,
+				address,
+				postCode,
+				status,
+				lastUpdate
+			</property>
+			<stmt>
+			<![CDATA[
+				SELECT 
+		        userId,
+				name,
+				mobile,
+				phone,
+				customerType,
+				province,
+				city,
+				areaCounty,
+				address,
+				postCode,
+				status,
+				lastUpdate
+	            FROM base_user_detail
+	            	]]> 
+			</stmt>
+		</meta>
+		<meta id="USERCUSTOMER">
+			<type>query</type>
+			<name>USERCUSTOMER</name>
+			<property>
+				userId,
+				loginName,
+				customerId,
+				counters,
+				customerUserId,
+				customerLoginName,
+				status,
+				lastUpdate
+			</property>
+			<stmt>
+			<![CDATA[
+				SELECT 
+		        userId,
+				loginName,
+				customerId,
+				counters,
+				customerUserId,
+				customerLoginName,
+				status,
+				lastUpdate
+	            FROM base_user_customer
+	            	]]> 
+			</stmt>
+		</meta>
+	</DDL>
+</metas>
+

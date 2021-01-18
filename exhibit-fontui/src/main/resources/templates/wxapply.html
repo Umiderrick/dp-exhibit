@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+		<script type="text/javascript" src="js/jquery-2.2.3.min.js" ></script>
+		<script type="text/javascript" src="js/compImg.js" ></script>
+		<script type="text/javascript" src="js/wxapply.js" ></script>
+		<link rel="stylesheet" href="css/weui.css" />
+		<title></title>
+	</head>
+	<body>
+		<div class="weui-cell">
+			<label style="font-size:23px;font-weight: bold; text-align: center;width: 100%;" id="title"></label>
+		</div>
+	
+		<div style="padding: 0 15px;">
+			<div class="weui-flex" style="font-size: 18px;font-weight: bold;">
+				<div class="weui-flex__item">
+					<label for="cs" style="vertical-align: middle;">初审结果:</label>
+					<i class="weui-icon-waiting" id="cs" style="font-size: 16px;">未提交</i>
+				</div>
+			</div>
+		</div>
+		
+		<form id="form1">
+		<div class="weui-cells">
+		
+			<div class="weui-cell">
+				<div class="weui-cell__hd" style="width: 30%;margin-right: 20px;">本店前2个月护肤系列销售占比排名：</div>
+				<div class="weui-cell__bd">
+					<span style='color: red' id="seriesRank" ></span>
+				</div>
+			</div>
+			<div class="weui-cell">
+					<div class="weui-cell__hd">柜台号：</div>
+					<div class="weui-cell__bd">
+						<span></span>
+						<input class="weui-input" name="counterCode" type="hidden" pattern="[0-9]*" placeholder="柜台号"/>
+					</div>
+			</div>
+			
+			<div class="weui-cell">
+					<div class="weui-cell__hd">柜台名称：</div>
+					<div class="weui-cell__bd">
+						<span></span>
+						<input class="weui-input" type="hidden" name="counterName" placeholder="柜台名称" />
+					</div>
+			</div>
+			
+			<div class="weui-cell">
+					<div class="weui-cell__hd">店面面积：</div>
+					<div class="weui-cell__bd">
+						<span></span>
+						<input class="weui-input" type="hidden" name="area" placeholder="店面面积"/>
+					</div>
+			</div>
+			
+			<div class="weui-cell">
+					<div class="weui-cell__hd">所在区域：</div>
+					<div class="weui-cell__bd">
+						<span></span>
+						<input class="weui-input" type="hidden" name="areaCounty" placeholder="所在区域"/>
+					</div>
+			</div>
+			
+			<div class="weui-cell">
+					<div class="weui-cell__hd">收到物料时间：</div>
+					<div class="weui-cell__bd">
+						<input class="weui-input" name="receiveTime" type="date" placeholder="收到物料时间yyyy/MM/dd" />
+					</div>
+			</div>
+			<div class="weui-cell">
+				<div class="weui-cell__hd">高柜数量：</div>
+				<div class="weui-cell__bd">
+					<input class="weui-input" name="showcaseQty" type="number"  placeholder="高柜数量" />
+				</div>
+			</div>
+			<div class="weui-cell">
+					<div class="weui-cell__hd">物料满意度：</div>
+					<div class="weui-cell__bd">
+						<input class="weui-input" onchange="checkSatisfy(this);" name="satisfy" type="number" placeholder="满意度（0~10分）"/>
+					</div>
+			</div>
+		</div>
+		<div class="weui-cell">
+			<div class="weui-cell__hd">
+				<div class="weui-cells__title">
+					<span>门头整体：</span>
+				</div>
+			</div>
+			<div class="weui-cell__bd">
+				<ul class="weui-uploader__files pic1">
+				</ul>
+				<div class="weui-uploader__input-box">
+					<input class="weui-uploader__input" type="file" accept="image/*" onchange="previewPic(this);"/>
+					<input type="hidden" name="pic1" value="" placeholder="门头整体">
+				</div>
+			</div>
+		</div>
+		<div class="weui-cell">
+			<div class="weui-cell__hd">
+				<div class="weui-cells__title">
+					<span>主推台：</span>
+				</div>
+			</div>
+			<div class="weui-cell__bd">
+				<ul class="weui-uploader__files pic2">
+				</ul>
+				<div class="weui-uploader__input-box">
+					<input class="weui-uploader__input" type="file" accept="image/*" onchange="previewPic(this);"/>
+					<input type="hidden" name="pic2" value="" placeholder="主推台">
+				</div>
+			</div>
+		</div>
+			<div class="weui-cell">
+				<div class="weui-cell__hd">
+					<div class="weui-cells__title">
+						<span>第一高柜：</span>
+					</div>
+				</div>
+				<div class="weui-cell__bd">
+					<ul class="weui-uploader__files pic3">
+					</ul>
+					<div class="weui-uploader__input-box">
+						<input class="weui-uploader__input" type="file" accept="image/*" onchange="previewPic(this);"/>
+						<input type="hidden" name="pic3" value="" placeholder="第一高柜">
+					</div>
+				</div>
+			</div>
+			<div class="weui-cell">
+				<div class="weui-cell__hd">
+					<div class="weui-cells__title">
+						<span>第二高柜：</span>
+					</div>
+				</div>
+				<div class="weui-cell__bd">
+					<ul class="weui-uploader__files pic8">
+					</ul>
+					<div class="weui-uploader__input-box">
+						<input class="weui-uploader__input" type="file" accept="image/*" onchange="previewPic(this);"/>
+						<input type="hidden" name="pic8" value="" placeholder="第二高柜">
+					</div>
+				</div>
+			</div>
+			<div class="weui-cell">
+				<div class="weui-cell__hd">
+					<div class="weui-cells__title">
+						<span>第三高柜：</span>
+					</div>
+				</div>
+				<div class="weui-cell__bd">
+					<ul class="weui-uploader__files pic9">
+					</ul>
+					<div class="weui-uploader__input-box">
+						<input class="weui-uploader__input" type="file" accept="image/*" onchange="previewPic(this);"/>
+						<input type="hidden" name="pic9" value="" placeholder="第三高柜">
+					</div>
+				</div>
+			</div>
+			<div class="weui-cell">
+				<div class="weui-cell__hd">
+					<div class="weui-cells__title">
+						<span>集中售卖区：</span>
+					</div>
+				</div>
+				<div class="weui-cell__bd">
+					<ul class="weui-uploader__files pic4">
+
+					</ul>
+					<div class="weui-uploader__input-box">
+						<input class="weui-uploader__input" type="file" accept="image/*" onchange="previewPic(this);"/>
+						<input type="hidden" name="pic4" value="" placeholder="集中售卖区">
+					</div>
+				</div>
+			</div>
+			<div class="weui-cell">
+				<div class="weui-cell__hd">
+					<div class="weui-cells__title">
+						<span>面膜/排行榜/植萃美眼：</span>
+					</div>
+				</div>
+				<div class="weui-cell__bd">
+					<ul class="weui-uploader__files pic5">
+					</ul>
+					<div class="weui-uploader__input-box">
+						<input class="weui-uploader__input" type="file" accept="image/*" onchange="previewPic(this);"/>
+						<input type="hidden" name="pic5" value="" placeholder="植萃美眼">
+					</div>
+				</div>
+			</div>
+			<div class="weui-cell">
+				<div class="weui-cell__hd">
+					<div class="weui-cells__title">
+						<span>护理区：</span>
+					</div>
+				</div>
+				<div class="weui-cell__bd">
+					<ul class="weui-uploader__files pic6">
+					</ul>
+					<div class="weui-uploader__input-box">
+						<input class="weui-uploader__input" type="file" accept="image/*" onchange="previewPic(this);"/>
+						<input type="hidden" name="pic6" value="" placeholder="护理区">
+					</div>
+				</div>
+			</div>
+			<div class="weui-cell">
+				<div class="weui-cell__hd">
+					<div class="weui-cells__title">
+						<span>工服：</span>
+					</div>
+				</div>
+				<div class="weui-cell__bd">
+					<ul class="weui-uploader__files pic7">
+					</ul>
+					<div class="weui-uploader__input-box">
+						<input class="weui-uploader__input" type="file" accept="image/*" onchange="previewPic(this);"/>
+						<input type="hidden" name="pic7" value="" placeholder="其他的照片">
+					</div>
+				</div>
+			</div>
+			<div class="weui-cells__title">建议：</div>
+			<div class="weui-cells weui-cells_form">
+				<div class="weui-cell">
+					<div class="weui-cell__bd">
+						<textarea class="weui-textarea" name="suggest" onkeydown="checkSuggest(this,100);" onkeyup="checkSuggest(this,100);"
+							onfocus="checkSuggest(this,100);" onblur="checkSuggest(this,100);"
+							placeholder="您的宝贵意见" rows="3"></textarea>
+						<div class="weui-textarea-counter">
+							<span id="suggest-len">0/100</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		<div class="weui-gallery">
+			<span class="weui-gallery__img" ></span>
+			<div class="weui-gallery__opr">
+				<a class="weui-gallery__del">
+					<i class="weui-icon-delete weui-icon_gallery-delete"></i>
+				</a>
+			</div>
+		</div>
+		<div class="weui-cells__title" style="color:red;">*请认真核对店面信息和陈列图片，确保上述信息正确</div>
+		<div class="weui-btn-area">
+			<a class="weui-btn weui-btn_primary save">提交</a>
+		</div>
+	</body>
+</html>

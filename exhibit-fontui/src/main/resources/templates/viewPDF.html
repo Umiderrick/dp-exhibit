@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>查询月度指导</title>
+<style>
+	html,body{
+		 height:95%;
+		}
+	.btn{
+		  width: 45%;
+		  position:relative;
+		  display:inline-block;
+		  margin-left:auto;
+		  margin-right:auto;
+		  padding-left:14px;
+		  padding-right:14px;
+		  box-sizing:border-box;
+		  font-size:18px;
+		  text-align:center;
+		  text-decoration:none;
+		  color:#FFFFFF;
+		  line-height:2.55555556;
+		  border-radius:5px;
+		  -webkit-tap-highlight-color:rgba(0, 0, 0, 0);
+		  overflow:hidden;
+	}
+	.btn-primary{
+		background-color: #1AAD19;
+	}
+	.btn-area{
+		margin:1.17647059em 15px 0.3em;
+		padding-bottom: 20px;
+		width: 98%;
+		margin-left: 1%;
+		text-align: center;
+	}
+ 	#getcommon{ 
+ 		display: none; 
+ 	} 
+</style>
+</head>
+<body>
+	<iframe id="pdf"  height="85%" width="100%" ></iframe>
+	<div style="color: red;text-align: center;">
+		<div>*请仔细阅读上方月度指导</div>
+	</div>
+	<div class="btn-area">
+		<a class="btn btn-primary" href="index">同意</a>
+		<a class="btn btn-primary" id ="getcommon">查看全国指导</a>
+	</div>
+</body>
+<script type="text/javascript" src="js/jquery-2.2.3.min.js" ></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		Request = GetRequest();
+		let url = Request["url"];
+		let fra =document.getElementById('pdf');
+		fra.src='generic/web/viewer.html?file='+url;
+		initguide(url);
+	});
+	function GetRequest() {
+		let url = location.search; //获取url中"?"符后的字串
+		let theRequest = new Object();
+		if (url.indexOf("?") != -1) {
+			let str = url.substr(1);
+			let strs = str.split("&");
+			for (let i = 0; i < strs.length; i++) {
+				theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+			}
+		}
+		return theRequest;
+	}
+	
+	function initguide(url){
+		 $.ajax({
+				url:"/getcommonguide",
+				type:"get",
+				async:true,
+				success:function(res){
+					if(res.status==0){
+						if(!url.match(res.data.accUrl)){
+							$("#getcommon").attr('href',"viewPDF.html?url="+res.data.accUrl);
+							$("#getcommon").css("display", "inline-block");
+						}
+					}
+				},
+				error:function(err){
+					console.log("数据错误"+err);
+				}
+			})
+	}
+</script>
+</html>

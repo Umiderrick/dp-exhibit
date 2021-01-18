@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="renderer" content="webkit">
+<title>申请档案</title>
+
+<meta name="keywords" content="">
+<meta name="description" content="">
+
+<link href="common/css/bootstrap.min.css?v=3.4.0"
+	rel="stylesheet">
+<link href="common/css/font-awesome.min.css?v=4.3.0"
+	rel="stylesheet">
+<link href="common/plugins/layer/skin/layer.css"
+	rel="stylesheet">
+<link href="common/plugins/datepicker/datepicker3.css"
+	rel="stylesheet">
+<link
+	href="common/plugins/bootstraptable/bootstrap-table.min.css"
+	rel="stylesheet">
+<link href="common/css/skins.css" rel="stylesheet">
+<link href="common/css/select2.min.css" rel="stylesheet">
+<link href="common/css/AdminLTE.min.css" rel="stylesheet">
+<link href="common/css/bootstrap-table-pagejump.css" rel="stylesheet">
+<link rel="stylesheet" href="common/css/site.css">
+<link href="css/adm.css" rel="stylesheet">
+</head>
+<body style="height: 73%;">
+	<div id="toolbar">
+		<div class="form-horizontal">
+			<div class="col-sm-12" style="height: 97.9%; min-width: 1000px;">
+				<label class="col-sm-1 control-label">门店名称：</label>
+				<div class="col-sm-2"
+					style="padding-left: 0px; padding-right: 0px; padding-top: 8px;">
+					<input type="text" id="name" name="name" class="form-control">
+				</div>
+				<label class="col-sm-1 control-label">门店号：</label>
+				<div class="col-sm-2"
+					style="padding-left: 0px; padding-right: 0px; padding-top: 8px;">
+					<input type="text" id="code" name="code" class="form-control">
+				</div>
+				<div class="col-sm-1" style="line-height: 1.5; padding-top: 8px;">
+				<button id="query" class="btn btn-default" type="button">
+						<i class="fa fa-search"></i>&nbsp;&nbsp;查询
+				</button>
+				</div>
+				
+				
+				<label class='col-sm-1 control-label'>导出月份:</label>
+				<div class='col-sm-2'>
+	                <div class="col-sm-12 input-group date" style="padding-left: 0px; padding-right: 0px; padding-top: 8px;">
+	                  <div class="input-group-addon">
+	                    <i class="fa fa-calendar"></i>
+	                  </div>
+	                  <input class="form-control pull-right" id="datepicker" type="text">
+	                </div>
+				</div>
+                <div class="col-sm-3" style="line-height: 1.5; padding-top: 8px;">
+					
+					<button id="dl1" class="btn btn-primary form-group-btn"
+						type="button" >
+						导出通过
+					</button>
+					<button id="dl2" class="btn btn-primary form-group-btn"
+						type="button" >
+						导出退回
+					</button>
+				</div>
+              
+			</div>
+		</div>
+	</div>
+
+	<div class="col-sm-12" style="height: 97.9%;">
+		<div class="table-responsive">
+			<table id="table" style="min-width: 1000px;" data-show-jumpto="true"></table>
+		</div>
+	</div>
+	<div id="model" style="display: none; margin: 25px;">
+			<div class="form-horizontal">
+				<div class="form-group" style="margin-bottom: 5px;">		
+					<div class="validate">
+						<div class="col-sm-12">
+						 	<label class="control-label">
+								<div class="btn btn-primary form-group-btn"	type="button">
+									<i class="fa-folder-open-o"></i>&nbsp;&nbsp;选择文件
+								</div>
+								<input id="file" style="display: none;"	 type="file" value="上传指导" onchange="previewImage(this)">
+							</label>
+							<label class="control-label">
+								<button id="upload" class="btn btn-primary form-group-btn"type="button">
+									<i class="fa fa-cloud-upload"></i>&nbsp;&nbsp;上传
+								</button>
+							</label>
+						</div>
+						<div class="col-sm-12" id="fileall" style="margin-top: 10px;"></div>
+					</div>
+				</div>
+			</div> 
+	</div>
+	<!-- 全局js -->
+	<script src="common/js/jquery-2.2.3.min.js"></script>
+	<script src="common/js/bootstrap.min.js"></script>
+	<script
+		src="common/plugins/bootstraptable/bootstrap-table.min.js"></script>
+	<script
+		src="common/plugins/bootstraptable/locale/bootstrap-table-zh-CN.min.js"></script>
+	<script
+		src="common/plugins/jquery-validation/jquery.validate.min.js"></script>
+	<script
+		src="common/plugins/jquery-validation/jquery.metadata.js"></script>
+	<script src="common/plugins/jquery-validation/messages_cn.js"></script>
+	<script src="common/js/vaildation.js"></script>
+	<script src="common/plugins/layer/layer.js"></script>
+	<script
+		src="common/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+	<script src="common/plugins/select2/select2.full.min.js"></script>
+	<script
+		src="common/plugins/datepicker/bootstrap-datepicker.js"></script>
+	<script src="common/js/bootstrap-table-pagejump.js"></script>
+	<script src="js/config.js"></script>
+	<script src="js/web/exhibit/apply.js"></script>
+	<script type="text/javascript">
+		$(function() {
+		window.Apply.init(); 
+		$('#datepicker').datepicker({
+			format: 'yyyy-mm',
+		    startView: 'months',
+		    maxViewMode:'years',
+		    minViewMode:'months',
+        	todayBtn : "linked",  
+        	autoclose : true,  
+       		todayHighlight : true
+		});	
+		}); 
+		function cancel(id) {
+			console.log(id);
+			$.ajax({
+				url : "apply/cancel/"+id+".do",
+				async : false,
+				dataType : 'json',
+				success : function(result) {
+					
+					if(result.status==0){
+						alert(result.message[0])
+						location.reload();
+					}
+				},
+				error : function(jqXHR, textStatus, errorThrown) {
+					if (textStatus == 'error') {
+						alert('网络通信失败，请稍后重试！');
+					} else {
+						alert(errorThrown + ',' + textStatus);
+					}
+				}
+			});
+		}
+	</script>
+</body>
+</html>

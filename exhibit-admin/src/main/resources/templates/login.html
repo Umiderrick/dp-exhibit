@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link rel="stylesheet" href="common/css/bootstrap.min.css" />
+<link rel="stylesheet" href="common/plugins/bootstrapvalidator/css/bootstrapValidator.min.css">
+<link rel="stylesheet" href="common/css/font-awesome.min.css" />
+<link rel="stylesheet" href="common/css/AdminLTE.min.css" />
+<link rel="stylesheet" href="common/css/skins.css" />
+</head>
+<body class="hold-transition ">
+	<div class="login-box">
+		<div class="text-center">
+			<h2 class="login-logo">植物医生内部门店管理系统</h2>
+		</div>
+		<form id="defaultForm" method="post">
+			<div class="login-box-body">
+				<div class="form-group">
+					<input name="username" type="text" class="form-control"
+						placeholder="用户名" required="required" />
+				</div>
+				<div class="form-group">
+					<input  name="password" type="password" class="form-control"
+						placeholder="密码" required="required" />
+				</div>
+				<div id="msg" class="form-group has-error">
+					<span class="help-block m-b-none"
+						style="text-align: left; margin-bottom: 5px;"> <span
+						id="error"></span>
+					</span>
+				</div>
+				<button type="submit" class="btn btn-primary btn-block " >登 录</button>
+			</div>
+		</form>
+	</div>
+	<script src="common/js/jquery-2.2.3.min.js"></script>
+	<script src="common/js/bootstrap.min.js"></script>
+	<script src="common/plugins/bootstrapvalidator/js/bootstrapValidator.min.js"></script>
+	<script src="common/js/app.js"></script>
+	<script src="common/js/jquery.cookie.js"></script>
+	<script src="js/config.js"></script>
+	<script src="js/web/login.js"></script>
+	 <script type="text/javascript">
+        $(function () {
+            window.Login.init();
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="renderer" content="webkit">
+<title>申请档案</title>
+
+<meta name="keywords" content="">
+<meta name="description" content="">
+
+<link href="common/css/bootstrap.min.css?v=3.4.0"
+	rel="stylesheet">
+<link href="common/css/font-awesome.min.css?v=4.3.0"
+	rel="stylesheet">
+<link href="common/plugins/layer/skin/layer.css"
+	rel="stylesheet">
+<link href="common/plugins/datepicker/datepicker3.css"
+	rel="stylesheet">
+<link
+	href="common/plugins/bootstraptable/bootstrap-table.min.css"
+	rel="stylesheet">
+<link href="common/css/skins.css" rel="stylesheet">
+<link href="common/css/select2.min.css" rel="stylesheet">
+<link href="common/css/AdminLTE.min.css" rel="stylesheet">
+<link rel="stylesheet" href="common/css/site.css">
+<link href="css/adm.css" rel="stylesheet">
+</head>
+<body style="height: 73%;">
+	<div id="toolbar">
+		<div class="form-horizontal">
+			<div class="col-sm-12" style="height: 97.9%; min-width: 1000px;">
+				<label class="col-sm-2 control-label">指导名称：</label>
+				<div class="col-sm-2"
+					style="padding-left: 0px; padding-right: 0px; padding-top: 8px;">
+					<input type="text" id="name" name="name" class="form-control">
+				</div>
+
+				<div class="col-sm-8" style="line-height: 1.5; padding-top: 8px;">
+					<button id="query" class="btn btn-default" type="button">
+						<i class="fa fa-search"></i>&nbsp;&nbsp;查询
+					</button>
+					<button id="create" class="btn btn-primary form-group-btn" type="button">
+						<i class="fa fa-plus"></i>&nbsp;&nbsp;新增
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-sm-12" style="height: 97.9%;">
+		<div class="table-responsive">
+			<table id="table" style="min-width: 1000px;"></table>
+		</div>
+	</div>
+		<div id="model" style="display: none; margin: 25px;">
+				<div class="form-horizontal">
+					<div class="form-group" style="margin-bottom: 5px;">		
+						<div class="validate">
+							<div class="col-sm-12" style="height: 97.9%; min-width: 1000px;">
+								<label class="col-sm-2 control-label" style="padding-top: 15px">指导名称：</label>
+								<div class="col-sm-3"
+									style="padding-left: 0px; padding-right: 0px; padding-top: 8px;">
+									<input id="guideName" name="name" 
+										class="form-control">
+								</div>
+								<label class="col-sm-2 control-label" style="padding-top: 15px">指导月份：</label>
+								<div class="col-sm-3"
+									style="padding-left: 0px; padding-right: 0px; padding-top: 8px;">
+									<input id="useMonth" name="useMonth" 
+										class="form-control">
+								</div>
+							</div>
+							<div class="col-sm-12" style="height: 97.9%; min-width: 1000px;">
+								<label class="col-sm-2 control-label" style="padding-top: 15px">是否使用：</label>
+								<div class="col-sm-3"
+									style="padding-left: 0px; padding-right: 0px; padding-top: 8px;">
+									<select class="form-control" id="is_use">
+									<option value="true">是</option>
+									<option value="false">否</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-sm-12">
+							 	<label class="control-label">
+									<div class="btn btn-primary form-group-btn"	type="button">
+										<i class="fa-folder-open-o"></i>&nbsp;&nbsp;选择文件
+									</div>
+									<input id="file" accept=".pdf" style="display: none;"	 type="file" value="上传指导" onchange="previewImage(this)">
+								</label>
+								<input id="url_return" type="hidden">
+								<label class="control-label">
+									<button id="upload" class="btn btn-primary form-group-btn"type="button">
+										<i class="fa fa-cloud-upload"></i>&nbsp;&nbsp;上传
+									</button>
+								</label>
+							</div>
+							<div class="col-sm-12" id="fileall" style="margin-top: 10px;"></div>
+						</div>
+					</div>
+				</div> 
+		</div>
+	<!-- 全局js -->
+	<script src="common/js/jquery-2.2.3.min.js"></script>
+	<script src="common/js/bootstrap.min.js"></script>
+	<script
+		src="common/plugins/bootstraptable/bootstrap-table.min.js"></script>
+	<script
+		src="common/plugins/bootstraptable/locale/bootstrap-table-zh-CN.min.js"></script>
+	<script
+		src="common/plugins/jquery-validation/jquery.validate.min.js"></script>
+	<script
+		src="common/plugins/jquery-validation/jquery.metadata.js"></script>
+	<script src="common/plugins/jquery-validation/messages_cn.js"></script>
+	<script src="common/js/vaildation.js"></script>
+	<script src="common/plugins/layer/layer.js"></script>
+	<script
+		src="common/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+	<script src="common/plugins/datepicker/bootstrap-datepicker.js"></script>
+	<script src="common/plugins/datepicker/bootstrap-datepicker.zh-CN.js"></script>
+	<script src="js/config.js"></script>
+	<script src="js/web/exhibit/guide.js"></script>
+	<script type="text/javascript">
+		$(function() {
+		window.Guide.init(); 
+		});
+		function deleteGuide(id) {
+		window.Config.Ajax(window.Config.Domain+'/guide/delete.do', {
+			id:id
+		},'GET', function (result) {
+			if (result.status === 0) {
+				layer.alert(result.message[1]);
+				location.reload();
+			}  else if (result.status==-7){
+				if (window.top!=null && window.top.document.URL!=document.URL){
+					window.top.location= window.Config.Domain;
+				}
+			} else {
+				layer.alert(result.message[1]);
+			}
+		});
+	}
+		$("#create").click(function(){
+				layer.open({
+	            type: 1,
+	            offset:['20px'], 
+	            title: '新增指导',
+	            area: ['60%', '60%'],
+	            fix: false, //不固定
+	            maxmin: false,
+	            content: $('#model'),
+	            btn: ['新增','取消'],
+	            yes: function (index, layero) {
+	            	if($("#guideName").val()==''||$("#useMonth").val()==''){
+	            		layer.alert('所有信息不能为空！',{closeBtn : 0,skin : 'layui-layer-molv'});
+	            		return false;
+	            	} 
+	            	window.Config.Ajax(window.Config.Domain+window.Config.Services.saveGuide, {
+	            		name:$("#guideName").val(),
+	            		useMonth:$("#useMonth").val(),
+	            		counterCode:$("#counterCode").val(),
+	            		is_use:$('#is_use option:selected').val(),
+	            		accUrl:$('#url_return').val()
+			    			},'GET', function (result) {
+			    				if (result.status == 0) {
+			    				layer.alert('新增成功',{closeBtn : 0,skin : 'layui-layer-molv'});
+			    				layer.close(index);
+			    				location.reload();
+									}else{
+										layer.alert('新增失败',{closeBtn : 0,skin : 'layui-layer-molv'});
+									}
+			    			})
+	            	
+	            },btn2: function(index, layero){
+	            	layer.close(index);
+	            },
+					    success: function(layero, index){
+					    	
+							}
+	    });
+		})
+		var src='';
+		function previewImage(file){
+  	 if (file.files && file.files[0]) {
+  	    var reader = new FileReader();
+  	    reader.onload = function(evt) {
+  	    	$("#fileall").append("<div class='fileLeft'><img class='fileImg' src='common/img/file.png'></div><div class='fileRight'><div>"+file.files[0].name+"</div><div>"+Number(file.files[0].size/1024).toFixed(2)+"KB</div></div><div class='clear'></div>");
+  	      src=evt.target.result;
+  	    }
+  	   reader.readAsDataURL(file.files[0]);
+  	  } else {//IE
+  		 src=evt.target.result; 
+  	  }  
+    } 
+		$("#upload").click(function(){
+			if(src==''){
+				layer.alert('请先选择文件',{closeBtn : 0,skin : 'layui-layer-molv'});
+				return false;
+			}
+			window.Config.Ajax(window.Config.Domain
+				+ window.Config.Services.queryUpload, {
+					pdf : src
+				},'POST', function(result) {
+					if (result.status == 0) {
+						$(".fileImg").attr("src","common/img/fileOK.png");
+						$("#url_return").val(result.data)
+					}else{
+						$(".fileImg").attr("src","common/img/fileFAIL.png");
+						layer.alert(result.message[0], {
+							closeBtn : 0,
+							skin : 'layui-layer-molv',
+							icon : 2
+						});
+					}
+				})
+		})
+		$("#useMonth").datepicker({
+			language: "zh-CN",
+	      todayHighlight: true,
+	      format: 'yyyy-mm',
+	      autoclose: true,
+	      startView: 'months',
+	      maxViewMode:'months',
+	      minViewMode:'months'
+		});
+		$('#model').on('keyup','#counterName',function(){
+			 $(".Ulname").show();
+       var index = $.trim($(this).val().toString()); // 去掉两头空格
+       if(index != ''){ // 如果搜索框输入为空
+       	$(".Ulname li").addClass("on");
+       	$(".Ulname li:contains('"+index+"')").removeClass("on");
+       	$("#counterCode").val('');
+       }else{
+       	$(".Ulname").hide();
+       	$(".Ulname li").removeClass("on");
+       }
+	   });
+		$('#model').on('click','.Ulname li',function(){
+			$("#counterName").val($(this).text());
+			$("#counterCode").val($(this).attr('title'));
+			$(".Ulname").hide();
+	   });
+	</script>
+</body>
+</html>

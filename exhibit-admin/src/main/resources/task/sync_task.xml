@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="syncTask" class="com.zeusas.dp.exhibit.task.SyncTask">
+	</bean>
+	
+	<bean id="sync_task" class="com.zeusas.common.task.TaskBean">
+		<property name="cronTask" ref="syncTask" />
+		<property name="waitTime" value="300000" />
+		<property name="valid" value="true" />
+		<property name="cronExpresion">
+			<list>
+				<value>0 0 2 * * * * * 0</value>
+			</list>
+		</property>
+	</bean>
+</beans>

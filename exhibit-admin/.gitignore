@@ -1,0 +1,9 @@
+/target/
+
+/logs/
+
+/.settings/
+.classpath
+.pid
+.project
+/dp-exhibit-admin.iml

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+		<link rel="stylesheet" href="css/weui.css" />
+		<link rel="stylesheet" href="css/confirm.css" />
+		<style type="text/css">
+			.gallery-show{
+				display: block;
+			}
+			.model{
+				display: hidden;
+			}
+		</style>
+		<title></title>
+	</head>
+	<body>
+		<div class="weui-cell">
+			<label id="title" style="font-size:23px;font-weight: bold; text-align: center;width: 100%;"></label>
+		</div>
+		
+		<div class="weui-cell">
+			<select style="height: 100%; font-size: 16px;width: 100px;" id="appdate">
+			</select>
+		</div>
+		
+		<div style="padding: 0 15px;">
+			<div class="weui-flex" id="audit" style="font-size: 18px;font-weight: bold;">
+			</div>
+		</div>
+		<input type="hidden" id ="count" />
+		<div class="weui-cells">
+			<div class="weui-cell">
+				<div class="weui-cell__hd" style="width: 30%;margin-right: 20px;">本店前2个月护肤系列销售占比排名：</div>
+				<div class="weui-cell__bd">
+					<span style='color: red' id="seriesRank" ></span>
+				</div>
+			</div>
+			<div class="weui-cell">
+					<div class="weui-cell__hd">柜台号：</div>
+					<div class="weui-cell__bd">
+						<span name="counterCode"></span>
+					</div>
+			</div>
+			<div class="weui-cell">
+					<div class="weui-cell__hd">柜台名称：</div>
+					<div class="weui-cell__bd">
+						<span name="counterName"></span>
+					</div>
+			</div>
+			
+			<div class="weui-cell">
+					<div class="weui-cell__hd">店面面积：</div>
+					<div class="weui-cell__bd">
+						<span name="area"></span>
+					</div>
+			</div>
+			
+			<div class="weui-cell">
+					<div class="weui-cell__hd">所在区域：</div>
+					<div class="weui-cell__bd">
+						<span name="areaCounty"></span>
+					</div>
+			</div>
+			
+			<div class="weui-cell">
+					<div class="weui-cell__hd">收到物料时间：</div>
+					<div class="weui-cell__bd">
+						<span name="receiveTime"></span>
+					</div>
+			</div>
+			<div class="weui-cell">
+				<div class="weui-cell__hd">高柜数量：</div>
+				<div class="weui-cell__bd">
+					<span name="showcaseQty"></span>
+				</div>
+			</div>
+			<div class="weui-cell">
+					<div class="weui-cell__hd">物料满意度：</div>
+					<div class="weui-cell__bd">
+						<span name="satisfy"></span>
+					</div>
+			</div>
+		</div>
+		<form id="picform">
+		<input type="hidden" id="appId" name="applyId" value=""/>
+		<div class="weui-cell">
+			<div class="weui-cell__hd">
+				<div class="weui-cells__title">
+					<span>门头整体：</span>
+				</div>
+			</div>
+			<div class="weui-cell__bd">
+				<ul class="weui-uploader__files">
+					<li class="weui-uploader__file pic pic1"></li>
+				</ul>
+			</div>
+		</div>
+		<div class="weui-cell">
+			<div class="weui-cell__hd">
+				<div class="weui-cells__title">
+					<span>主推台：</span>
+				</div>
+			</div>
+			<div class="weui-cell__bd">
+				<ul class="weui-uploader__files">
+					<li class="weui-uploader__file pic pic2"></li>
+				</ul>
+			</div>
+		</div>
+			<div class="weui-cell">
+				<div class="weui-cell__hd">
+					<div class="weui-cells__title">
+						<span>第一高柜：</span>
+					</div>
+				</div>
+				<div class="weui-cell__bd">
+					<ul class="weui-uploader__files">
+						<li class="weui-uploader__file pic pic3"></li>
+					</ul>
+				</div>
+			</div>
+			<div class="weui-cell">
+				<div class="weui-cell__hd">
+					<div class="weui-cells__title">
+						<span>第二高柜：</span>
+					</div>
+				</div>
+				<div class="weui-cell__bd">
+					<ul class="weui-uploader__files">
+						<li class="weui-uploader__file pic pic8"></li>
+					</ul>
+				</div>
+			</div>
+			<div class="weui-cell">
+				<div class="weui-cell__hd">
+					<div class="weui-cells__title">
+						<span>第三高柜：</span>
+					</div>
+				</div>
+				<div class="weui-cell__bd">
+					<ul class="weui-uploader__files">
+						<li class="weui-uploader__file pic pic9"></li>
+					</ul>
+				</div>
+			</div>
+		<div class="weui-cell">
+			<div class="weui-cell__hd">
+				<div class="weui-cells__title">
+					<span>集中售卖区：</span>
+				</div>
+			</div>
+			<div class="weui-cell__bd">
+				<ul class="weui-uploader__files">
+					<li class="weui-uploader__file pic pic4"></li>
+				</ul>
+			</div>
+		</div>
+		<div class="weui-cell">
+			<div class="weui-cell__hd">
+				<div class="weui-cells__title">
+					<span>面膜/排行榜/植萃美眼：</span>
+				</div>
+			</div>
+			<div class="weui-cell__bd">
+				<ul class="weui-uploader__files">
+					<li class="weui-uploader__file pic pic5"></li>
+				</ul>
+			</div>
+		</div>
+		<div class="weui-cell">
+			<div class="weui-cell__hd">
+				<div class="weui-cells__title">
+					<span>护理区：</span>
+				</div>
+			</div>
+			<div class="weui-cell__bd">
+				<ul class="weui-uploader__files">
+					<li class="weui-uploader__file pic pic6"></li>
+				</ul>
+			</div>
+		</div>
+		<div class="weui-cell">
+			<div class="weui-cell__hd">
+				<div class="weui-cells__title">
+					<span>工服：</span>
+				</div>
+			</div>
+			<div class="weui-cell__bd">
+				<ul class="weui-uploader__files">
+					<li class="weui-uploader__file pic pic7">
+					</li>
+				</ul>
+			</div>
+		</div>
+		</form>
+		<div class="weui-cells__title">建议：</div>
+		<div class="weui-cells weui-cells_form">
+			<div class="weui-cell">
+				<div class="weui-cell__bd">
+					<span class="weui-textarea" rows="3" name="suggest" readonly></span>
+				</div>
+			</div>
+		</div>
+		<div class="weui-cells__title">审核建议：</div>
+		<div class="weui-cells weui-cells_form">
+			<div class="weui-cell">
+				<div class="weui-cell__bd">
+					<span  name="auditsuggest" ></span>
+				</div>
+			</div>
+		</div>
+		<div class="weui-gallery">
+			<span class="weui-gallery__img"></span>
+			<div class="weui-gallery__opr">
+				<a class="weui-gallery__del">
+					<i class="weui-icon-delete weui-icon_gallery-delete"></i>
+				</a>
+			</div>
+		</div>
+		<div class="weui-btn-area">
+			<a class="weui-btn weui-btn_primary" href="index">返回首页</a>
+		</div>
+	</body>
+	<script type="text/javascript" src="js/jquery-2.2.3.min.js" ></script>
+	<script type="text/javascript" src="js/monthdata.js" ></script>
+	<script type="text/javascript" src="js/compImg.js" ></script>
+	<script type="text/javascript" src="js/confirm.js" ></script>
+</html>

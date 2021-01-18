@@ -1,0 +1,12 @@
+/target/
+/logs/
+/.settings/
+.project
+.classpath
+~*
+*bak
+/bin/
+.DS_Store
+.pid
+/.idea/
+/dp-project-exhibit.iml
